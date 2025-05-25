@@ -2,7 +2,7 @@ import { Experience } from "@advanced-react/server/database/schema.ts";
 
 import { CommentCreateForm } from "@/features/comments/CommentCreateForm.tsx";
 import { CommentsList } from "@/features/comments/CommentsList.tsx";
-import { trpc } from "@/trpc.ts";
+import { trpc } from "@/router.ts";
 
 type CommentsSectionProps = {
   experienceId: Experience["id"];

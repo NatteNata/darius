@@ -14,7 +14,7 @@ import {
 } from "@/features/shared/components/ui/Form.tsx";
 import { TextArea } from "@/features/shared/components/ui/TextArea.tsx";
 import { useToast } from "@/features/shared/hooks/useToast.ts";
-import { trpc } from "@/trpc.ts";
+import { trpc } from "@/router.ts";
 
 type CommentCreateFormData = z.infer<typeof commentValidationSchema>;
 

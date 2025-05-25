@@ -13,7 +13,7 @@ import {
   DialogTrigger,
 } from "@/features/shared/components/ui/Dialog.tsx";
 import { useToast } from "@/features/shared/hooks/useToast.ts";
-import { trpc } from "@/trpc.ts";
+import { trpc } from "@/router.tsx";
 
 type CommentCardProps = {
   comment: CommentForList;
