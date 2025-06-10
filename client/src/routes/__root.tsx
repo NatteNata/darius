@@ -3,7 +3,7 @@ import {createRootRouteWithContext, Outlet} from "@tanstack/react-router";
 import Navbar from "@/features/shared/components/Navbar.tsx";
 import {ThemeProvider} from "@/features/shared/components/ThemeProvider.tsx";
 import {Toaster} from "@/features/shared/components/ui/Toaster.tsx";
-import {trpcQueryUtils} from "@/router.tsx";
+import {trpcQueryUtils} from "@/router";
 
 export type RouterAppContext = {
     trpcQueryUtils: typeof trpcQueryUtils;

@@ -2,7 +2,7 @@ import {RouterProvider} from "@tanstack/react-router";
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-import {router} from "@/router.tsx";
+import {router} from "@/router";
 
 import "./index.css";
 
