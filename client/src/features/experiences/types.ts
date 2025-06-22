@@ -9,3 +9,5 @@ type ExperienceWithCommentsCount = Experience & {
 };
 
 export type ExperienceForList = ExperienceWithUser & ExperienceWithCommentsCount;
+
+export type ExperienceForDetails = ExperienceWithUser & ExperienceWithCommentsCount;

@@ -1,4 +1,4 @@
-import { CommentCard } from "@/features/comments/CommentCard.tsx";
+import { CommentCard } from "@/features/comments/components/CommentCard.tsx";
 import { CommentForList } from "@/features/comments/types.ts";
 import Spinner from "@/features/shared/components/ui/Spinner.tsx";
 

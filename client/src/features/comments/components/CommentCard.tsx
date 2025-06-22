@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { CommentEditForm } from "@/features/comments/CommentEditForm.tsx";
+import { CommentEditForm } from "@/features/comments/components/CommentEditForm.tsx";
 import { CommentForList } from "@/features/comments/types.ts";
 import { Button } from "@/features/shared/components/ui/Button.tsx";
 import Card from "@/features/shared/components/ui/Card.tsx";
@@ -13,7 +13,7 @@ import {
   DialogTrigger,
 } from "@/features/shared/components/ui/Dialog.tsx";
 import { useToast } from "@/features/shared/hooks/useToast.ts";
-import { trpc } from "@/router";
+import { trpc } from "@/router.tsx";
 
 type CommentCardProps = {
   comment: CommentForList;

@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import {ExperiencesList} from "@/features/experiences/ExperiencesList.tsx";
+import {ExperiencesList} from "@/features/experiences/components/ExperiencesList.tsx";
 import {InfiniteScroll} from "@/features/shared/components/InfiniteScroll.tsx";
 import {trpc} from "@/router";
 

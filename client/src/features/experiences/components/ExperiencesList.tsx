@@ -1,4 +1,4 @@
-import { ExperienceCard } from "@/features/experiences/ExperienceCard.tsx";
+import { ExperienceCard } from "@/features/experiences/components/ExperienceCard.tsx";
 import { ExperienceForList } from "@/features/experiences/types.ts";
 import Spinner from "@/features/shared/components/ui/Spinner.tsx";
 
