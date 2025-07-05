@@ -1,9 +1,10 @@
+import { User } from "@advanced-react/server/database/schema";
+
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "@/features/shared/components/ui/Avatar";
-import { User } from "@advanced-react/server/database/schema";
 import { cn } from "@/lib/utils/cn";
 
 type UserAvatarProps = {
