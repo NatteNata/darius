@@ -1,8 +1,9 @@
+import { LinkIcon, MessageSquare } from "lucide-react";
+
 import { ExperienceForList } from "@/features/experiences/types.ts";
 import { Button } from "@/features/shared/components/ui/Button.tsx";
 import Card from "@/features/shared/components/ui/Card.tsx";
 import Link from "@/features/shared/components/ui/Link.tsx";
-import { LinkIcon, MessageSquare } from "lucide-react";
 import { UserAvatar } from "@/features/users/components/UserAvatar";
 
 type ExperienceCardProps = {
@@ -14,7 +15,7 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
     <Card className={"overflow-auto p-0"}>
       <ExperienceCardMedia experience={experience} />
       <div className={"flex items-start gap-4 p-4"}>
-        <ExperienceCardAvatar experience={experience}/>
+        <ExperienceCardAvatar experience={experience} />
         <div className={"w-full space-y-4"}>
           <ExperienceCardHeader experience={experience} />
           <ExperienceCardContent experience={experience} />
@@ -29,7 +30,11 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
 type ExperienceCardAvatarProps = Pick<ExperienceCardProps, "experience">;
 
 const ExperienceCardAvatar = ({ experience }: ExperienceCardAvatarProps) => {
-  return <UserAvatar user={experience.user} showName={false} />;
+  return (
+    <Link to={"/users/$userId"} params={{ userId: experience.user.id }}>
+      <UserAvatar user={experience.user} showName={false} />
+    </Link>
+  );
 };
 
 type ExperienceCardMediaProps = Pick<ExperienceCardProps, "experience">;
@@ -55,7 +60,9 @@ type ExperienceCardHeaderProps = Pick<ExperienceCardProps, "experience">;
 const ExperienceCardHeader = ({ experience }: ExperienceCardHeaderProps) => {
   return (
     <div>
-      <div>{experience.user.name}</div>
+      <Link to={"/users/$userId"} params={{ userId: experience.user.id }}>
+        <div>{experience.user.name}</div>
+      </Link>
       <Link
         to={"/experiences/$experienceId"}
         params={{ experienceId: experience.id }}

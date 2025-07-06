@@ -1,7 +1,7 @@
 import { Comment } from "@advanced-react/server/database/schema.ts";
+import {commentValidationSchema} from "@advanced-react/shared/schema/comment";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import {commentValidationSchema} from "@advanced-react/shared/schema/comment";
 import { z } from "zod";
 
 import { Button } from "@/features/shared/components/ui/Button.tsx";
@@ -13,10 +13,9 @@ import {
   FormItem,
   FormMessage,
 } from "@/features/shared/components/ui/Form.tsx";
+import { TextArea } from "@/features/shared/components/ui/TextArea.tsx";
 import { useToast } from "@/features/shared/hooks/useToast.ts";
 import { trpc } from "@/router.tsx";
-
-import { TextArea } from "@/features/shared/components/ui/TextArea.tsx";
 
 type CommentEditFormData = z.infer<typeof commentValidationSchema>;
 

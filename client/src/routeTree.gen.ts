@@ -13,7 +13,8 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as SearchImport } from './routes/search'
 import { Route as IndexImport } from './routes/index'
-import { Route as ExperiencesExperienceIdIndexImport } from './routes/experiences/$experienceId/index'
+import { Route as UsersUserIdImport } from './routes/users/$userId'
+import { Route as ExperiencesExperienceIdImport } from './routes/experiences/$experienceId'
 
 // Create/Update Routes
 
@@ -29,12 +30,17 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const ExperiencesExperienceIdIndexRoute =
-  ExperiencesExperienceIdIndexImport.update({
-    id: '/experiences/$experienceId/',
-    path: '/experiences/$experienceId/',
-    getParentRoute: () => rootRoute,
-  } as any)
+const UsersUserIdRoute = UsersUserIdImport.update({
+  id: '/users/$userId',
+  path: '/users/$userId',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ExperiencesExperienceIdRoute = ExperiencesExperienceIdImport.update({
+  id: '/experiences/$experienceId',
+  path: '/experiences/$experienceId',
+  getParentRoute: () => rootRoute,
+} as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -54,11 +60,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SearchImport
       parentRoute: typeof rootRoute
     }
-    '/experiences/$experienceId/': {
-      id: '/experiences/$experienceId/'
+    '/experiences/$experienceId': {
+      id: '/experiences/$experienceId'
       path: '/experiences/$experienceId'
       fullPath: '/experiences/$experienceId'
-      preLoaderRoute: typeof ExperiencesExperienceIdIndexImport
+      preLoaderRoute: typeof ExperiencesExperienceIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/users/$userId': {
+      id: '/users/$userId'
+      path: '/users/$userId'
+      fullPath: '/users/$userId'
+      preLoaderRoute: typeof UsersUserIdImport
       parentRoute: typeof rootRoute
     }
   }
@@ -69,41 +82,51 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/search': typeof SearchRoute
-  '/experiences/$experienceId': typeof ExperiencesExperienceIdIndexRoute
+  '/experiences/$experienceId': typeof ExperiencesExperienceIdRoute
+  '/users/$userId': typeof UsersUserIdRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/search': typeof SearchRoute
-  '/experiences/$experienceId': typeof ExperiencesExperienceIdIndexRoute
+  '/experiences/$experienceId': typeof ExperiencesExperienceIdRoute
+  '/users/$userId': typeof UsersUserIdRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/search': typeof SearchRoute
-  '/experiences/$experienceId/': typeof ExperiencesExperienceIdIndexRoute
+  '/experiences/$experienceId': typeof ExperiencesExperienceIdRoute
+  '/users/$userId': typeof UsersUserIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/search' | '/experiences/$experienceId'
+  fullPaths: '/' | '/search' | '/experiences/$experienceId' | '/users/$userId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/search' | '/experiences/$experienceId'
-  id: '__root__' | '/' | '/search' | '/experiences/$experienceId/'
+  to: '/' | '/search' | '/experiences/$experienceId' | '/users/$userId'
+  id:
+    | '__root__'
+    | '/'
+    | '/search'
+    | '/experiences/$experienceId'
+    | '/users/$userId'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SearchRoute: typeof SearchRoute
-  ExperiencesExperienceIdIndexRoute: typeof ExperiencesExperienceIdIndexRoute
+  ExperiencesExperienceIdRoute: typeof ExperiencesExperienceIdRoute
+  UsersUserIdRoute: typeof UsersUserIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SearchRoute: SearchRoute,
-  ExperiencesExperienceIdIndexRoute: ExperiencesExperienceIdIndexRoute,
+  ExperiencesExperienceIdRoute: ExperiencesExperienceIdRoute,
+  UsersUserIdRoute: UsersUserIdRoute,
 }
 
 export const routeTree = rootRoute
@@ -118,7 +141,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/search",
-        "/experiences/$experienceId/"
+        "/experiences/$experienceId",
+        "/users/$userId"
       ]
     },
     "/": {
@@ -127,8 +151,11 @@ export const routeTree = rootRoute
     "/search": {
       "filePath": "search.tsx"
     },
-    "/experiences/$experienceId/": {
-      "filePath": "experiences/$experienceId/index.tsx"
+    "/experiences/$experienceId": {
+      "filePath": "experiences/$experienceId.tsx"
+    },
+    "/users/$userId": {
+      "filePath": "users/$userId.tsx"
     }
   }
 }
