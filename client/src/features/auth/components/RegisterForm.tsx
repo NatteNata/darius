@@ -18,38 +18,37 @@ import Link from "@/features/shared/components/ui/Link";
 import { useToast } from "@/features/shared/hooks/useToast";
 import { trpc } from "@/router";
 
-const loginCredentialsSchema = userCredentialsSchema.omit({
-  name: true,
-});
+const registerCredentialsSchema = userCredentialsSchema;
 
-type LoginFormData = z.infer<typeof loginCredentialsSchema>;
+type RegisterFormData = z.infer<typeof registerCredentialsSchema>;
 
-export function LoginForm() {
+export function RegisterForm() {
   const { toast } = useToast();
   const utils = trpc.useUtils();
   const router = useRouter();
 
-  const form = useForm<LoginFormData>({
-    resolver: zodResolver(loginCredentialsSchema),
+  const form = useForm<RegisterFormData>({
+    resolver: zodResolver(registerCredentialsSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
     },
   });
 
-  const loginMutation = trpc.auth.login.useMutation({
+  const registerMutation = trpc.auth.register.useMutation({
     onSuccess: async () => {
       await utils.auth.currentUser.invalidate();
       router.navigate({ to: "/" });
 
       toast({
-        title: "Logged in",
-        description: "You have been logged in",
+        title: "Registered",
+        description: "You have been registered",
       });
     },
     onError: (error) => {
       toast({
-        title: "Failed to login",
+        title: "Failed to register",
         description: error.message,
         variant: "destructive",
       });
@@ -57,12 +56,26 @@ export function LoginForm() {
   });
 
   const handleSubmit = form.handleSubmit((data) => {
-    loginMutation.mutate(data);
+    registerMutation.mutate(data);
   });
 
   return (
     <Form {...form}>
       <form onSubmit={handleSubmit} className="space-y-4">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input {...field} type="text" placeholder="John Doe" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="email"
@@ -76,6 +89,7 @@ export function LoginForm() {
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="password"
@@ -92,16 +106,16 @@ export function LoginForm() {
         <Button
           type="submit"
           className="w-full"
-          disabled={loginMutation.isPending}
+          disabled={registerMutation.isPending}
         >
-          {loginMutation.isPending ? "Logging in..." : "Login"}
+          {registerMutation.isPending ? "Registering..." : "Register"}
         </Button>
-        <div className="flex justify-center items-center">
-          <Link to={"/register"} variant={"ghost"}>
-            Don't have an account? Register
-          </Link>
-        </div>
       </form>
+      <div className={"flex items-center justify-center"}>
+        <Link to={"/login"} variant={"ghost"}>
+          Already have an account? Login
+        </Link>
+      </div>
     </Form>
   );
 }
